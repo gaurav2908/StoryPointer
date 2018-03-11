@@ -1,0 +1,71 @@
+So while navigating you can pass pass props to the history object like
+
+this.props.history.push({
+  pathname: '/template',
+  search: '?query=abc',
+  state: { detail: response.data }
+})
+or similarly for the link component
+
+<Link to={{
+      pathname: '/template',
+      search: '?query=abc',
+      state: { detail: response.data }
+    }}> My Link </Link>
+and then in the component which is rendered with /template route, you can access the props passed like
+
+this.props.location.state.detail
+Also keep in mind that, when using history or location objects from props you need to connect the component with withRouter.
+
+=========
+import {Link} from 'react-router-dom';
+
+<Link style={{display: 'block', height: '150%'}} to={'/join/' + this.state.sessionId}>Start</Link>
+
+=========
+
+            {/*<Route exact path="/join" component={Join}/>*/}
+            {/*<Route exact path="/join" render={(props) => (<Join {...props}/>)}/>*/}
+            {/*<Route exact path="/join" render={() => <Join num="123"/>}/>*/}
+            {/*<Route exact path="/join" component={Join} state={state}/>*/}
+            {/*<Route exact path="/join/:value" component={Join}/>*/}
+
+=========
+
+        fetch(url, {
+            method: "GET",
+            headers: {
+                // 'Accept':  'application/json',
+                'Content-Type': 'application/json'
+                // 'Cache': 'no-cache'
+            },
+            credentials: 'same-origin'
+        })
+            .then(d => d.json())
+            .then(d => {
+                this.setState({
+                    sessionId: d.sessionId
+                })
+            })
+
+=========
+
+https://medium.com/@pshrmn/a-simple-react-router-v4-tutorial-7f23ff27adf
+https://github.com/stripe/react-stripe-elements
+https://letsencrypt.org/
+https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https.html
+
+==========
+to debug:
+mvn spring-boot:run -Drun.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"
+
+
+java -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=y -jar baseapp-0.0.1-SNAPSHOT.jar
+
+
+debug tomcat:
+export CATALINA_OPTS="-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n"
+sh ./catalina.sh start
+
+=========
+

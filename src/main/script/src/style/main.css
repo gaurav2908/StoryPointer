@@ -1,0 +1,67 @@
+.Button {
+    border-radius: 5px;
+    font-size: 13px;
+    margin-left: 10px;
+}
+
+.Margins {
+    margin-left: 10px;
+    margin-bottom: 8px;
+}
+
+.BottomMargin {
+    margin-bottom: 8px;
+}
+
+input[type=text], select {
+    margin-left: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding-left: 4px;
+    font-size: 15px;
+}
+
+.Name {
+    width: 150px;
+}
+
+.Desc {
+    width: 400px;
+}
+
+.Border {
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding-bottom: 20px;
+}
+
+.SpanHover {
+    position: absolute;
+}
+.SpanHover span {
+    position: absolute;
+    width: 0px;
+    visibility: hidden;
+}
+.SpanHover:hover span, .SpanHover span:hover {
+    visibility: visible;
+    width: 20px;
+}
+
+.nav-background {
+    background-color: #dce0e4 !important;
+}
+
+.navbar-brand {
+    padding-right: 100px;
+}
+
+.nav-item {
+    padding-right: 20px;
+}
+
+.navbar {
+    height: 40px;
+}
