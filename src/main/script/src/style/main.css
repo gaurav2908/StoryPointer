@@ -9,6 +9,15 @@
     margin-bottom: 8px;
 }
 
+.Left {
+    width: 200px;
+    float: left;
+}
+
+.Right {
+    margin-left: 400px;
+}
+
 .BottomMargin {
     margin-bottom: 8px;
 }

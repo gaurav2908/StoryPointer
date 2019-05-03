@@ -42,7 +42,7 @@ export default class Home extends React.Component {
 
     handleStartSession() {
         let domain = window.location.origin;
-        let url = domain + '/session/get';
+        let url = domain + '/session/create';
         console.log(url);
         fetch(url, {
             method: "GET",
@@ -55,7 +55,7 @@ export default class Home extends React.Component {
             .then(d => {
                 this.props.history.push({
                     pathname: '/join',
-                    state: {sessionId: d.sessionId, host: true}
+                    state: {sessionId: d.sessionId}
                 });
             });
     }

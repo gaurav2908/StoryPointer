@@ -8,3 +8,8 @@ java -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=y -jar bas
 debug tomcat:
 export CATALINA_OPTS="-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n"
 sh ./catalina.sh start
+
+url:
+http://localhost:5000
+
+debug port: 8000

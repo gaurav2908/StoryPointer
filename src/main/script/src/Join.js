@@ -61,8 +61,7 @@ export class Join extends React.Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                name: this.state.name,
-                host: this.props.location.state.host
+                name: this.state.name
             }),
             credentials: 'same-origin'
         })
@@ -72,8 +71,7 @@ export class Join extends React.Component {
             pathname: '/game',
             state: {
                 sessionId: this.state.sessionId,
-                name: this.state.name,
-                host: this.props.location.state.host
+                name: this.state.name
             }
         });
     }

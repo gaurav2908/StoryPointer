@@ -13,8 +13,7 @@ export default class Game extends React.Component {
         this.state = {
             players: '',
             desc: '',
-            showVotes: false,
-            host: false,
+            showVotes: false
         };
         this.handleChangeDesc = this.handleChangeDesc.bind(this);
         this.handleSubmitDesc = this.handleSubmitDesc.bind(this);
@@ -24,10 +23,15 @@ export default class Game extends React.Component {
         this.handlePointClick = this.handlePointClick.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
         this.checkUpdate = this.checkUpdate.bind(this);
+        this.loadPlayers = this.loadPlayers.bind(this);
         this.sleep = this.sleep.bind(this);
     }
 
     componentDidMount() {
+        this.loadPlayers()
+    }
+
+    loadPlayers() {
         let url = window.location.origin + '/session/players';
         fetch(url, {
             method: "GET",
@@ -39,8 +43,7 @@ export default class Game extends React.Component {
             .then(d => d.json())
             .then(d => {
                 this.setState({
-                    players: d,
-                    host: this.props.location.state.host
+                    players: d
                 });
                 this.checkUpdate();
             })
@@ -87,18 +90,10 @@ export default class Game extends React.Component {
                     this.sleep(5000).then(this.checkUpdate);
                 } else {
                     d.json().then(data => {
-                        let playerIdCookie = this.getCookie('playerId');
-                        let player = data.players.filter(
-                            function (data) {
-                                return data.playerId == playerIdCookie
-                            }
-                        );
-                        let isHost = player[0].host;
                         this.setState({
                             desc: data.desc,
                             showVotes: data.showVotes,
-                            players: data.players,
-                            host: isHost
+                            players: data.players
 
                         }, this.checkUpdate);
                     });
@@ -198,7 +193,7 @@ export default class Game extends React.Component {
     render() {
         let renderPlayers = null;
         if (this.state.players.length > 0) {
-            renderPlayers = <RenderPlayers players={this.state.players} host={this.state.host}/>
+            renderPlayers = <RenderPlayers players={this.state.players}/>
         }
         let displayVotes = null;
         if (this.state.showVotes && this.state.players.length > 0) {
@@ -207,8 +202,13 @@ export default class Game extends React.Component {
         return (
             <div>
                 {<Header/>}
-                <div className="Margins">Session id: {this.props.location.state.sessionId}</div>
-                <div className="Margins">Name: {this.props.location.state.name} {this.state.host && <text>(Host)</text>}</div>
+                <div className="Margins">
+                    <div className="Left">session id: {this.props.location.state.sessionId}</div>
+                    <div>
+                        <button className="Button Right" onClick={this.loadPlayers}>Reconnect</button>
+                    </div>
+                </div>
+                <div className="Margins">Name: {this.props.location.state.name}</div>
                 <div className="Margins">
                     Description:
                     <AutosizeInput
@@ -220,12 +220,10 @@ export default class Game extends React.Component {
                         onChange={this.handleChangeDesc}
                     />
                     {
-                        this.state.host &&
                         <button className="Button" onClick={this.handleSubmitDesc}>Submit</button>
                     }
                 </div>
                 {
-                    this.state.host &&
                     <div className="BottomMargin">
                         <button className="Button" onClick={this.handleShowVotes}>Show votes</button>
                         <button className="Button" onClick={this.handleClearVotes}>Clear votes</button>
